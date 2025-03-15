@@ -1,0 +1,13 @@
+data NameTime_table;
+    length Name $50 Current_Time $20;
+    Name = "Milan Paudel";  /* Replace with your actual name */
+    Current_Time = put(time(), timeampm11.);  /* Gets current time in hh:mm:ss.ss with AM or PM format */
+    output;
+run;
+
+proc print data=NameTime_table noobs label;
+    var Name Current_Time; /* Display only these columns */
+run;
+proc freq data=SASHELP.IRIS;
+	tables Species / nocum plots=none;
+run;
