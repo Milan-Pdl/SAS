@@ -1,0 +1,26 @@
+ods graphics / reset width=6.4in height=4.8in imagemap;
+data NameTime_table;
+    length Name $50 Current_Time $20;
+    Name = "Milan Paudel";  /* Replace with your actual name */
+    Current_Time = put(time(), timeampm11.);  /* Gets current time in hh:mm:ss.ss with AM or PM format */
+    output;
+run;
+
+proc print data=NameTime_table noobs label;
+    var Name Current_Time; /* Display only these columns */
+run;
+* Box plot for all values of Cylinders;
+proc sgplot data=SASHELP.CARS;
+    title "Box Plot of Invoice Price for Each Cylinder Value";
+    hbox Invoice / category=Cylinders;
+    yaxis grid;
+run;
+
+* Box plot for rows where Cylinders = 4 or Cylinders = 6;
+proc sgplot data=SASHELP.CARS(where=(Cylinders=4 or Cylinders=6));
+    title "Box Plot of Invoice Price for 4 and 6 Cylinder Cars";
+    hbox Invoice / category=Cylinders;
+    yaxis grid;
+run;
+
+ods graphics / reset;
