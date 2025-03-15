@@ -1,0 +1,63 @@
+ods graphics / reset width=6.4in height=4.8in imagemap;
+data NameTime_table;
+    length Name $50 Current_Time $20;
+    Name = "Milan Paudel";  /* Replace with your actual name */
+    Current_Time = put(time(), timeampm11.);  /* Gets current time in hh:mm:ss.ss with AM or PM format */
+    output;
+run;
+
+proc print data=NameTime_table noobs label;
+    var Name Current_Time; /* Display only these columns */
+run;
+
+* Histogram and Box plot for Male data (Weight and Height);
+proc sgplot data=SASHELP.HEART(where=(Sex='Male'));
+    title "Histogram of Weight for Males";
+    histogram Weight;
+    yaxis grid;
+run;
+
+proc sgplot data=SASHELP.HEART(where=(Sex='Male'));
+    title "Box Plot of Weight for Males";
+    vbox Weight / category=Status;
+    yaxis grid;
+run;
+
+proc sgplot data=SASHELP.HEART(where=(Sex='Male'));
+    title "Histogram of Height for Males";
+    histogram Height;
+    yaxis grid;
+run;
+
+proc sgplot data=SASHELP.HEART(where=(Sex='Male'));
+    title "Box Plot of Height for Males";
+    vbox Height / category=Status;
+    yaxis grid;
+run;
+
+* Histogram and Box plot for Female data (Weight and Height);
+proc sgplot data=SASHELP.HEART(where=(Sex='Female'));
+    title "Histogram of Weight for Females";
+    histogram Weight;
+    yaxis grid;
+run;
+
+proc sgplot data=SASHELP.HEART(where=(Sex='Female'));
+    title "Box Plot of Weight for Females";
+    vbox Weight / category=Status;
+    yaxis grid;
+run;
+
+proc sgplot data=SASHELP.HEART(where=(Sex='Female'));
+    title "Histogram of Height for Females";
+    histogram Height;
+    yaxis grid;
+run;
+
+proc sgplot data=SASHELP.HEART(where=(Sex='Female'));
+    title "Box Plot of Height for Females";
+    vbox Height / category=Status;
+    yaxis grid;
+run;
+
+ods graphics / reset;
