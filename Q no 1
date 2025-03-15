@@ -1,0 +1,22 @@
+ods noproctitle;
+ods graphics / imagemap=on;
+data NameTime_table;
+    length Name $50 Current_Time $20;
+    Name = "Milan Paudel";  /* Replace with your actual name */
+    Current_Time = put(time(), timeampm11.);  /* Gets current time in hh:mm:ss.ss with AM or PM format */
+    output;
+run;
+
+proc print data=NameTime_table noobs label;
+    var Name Current_Time; /* Display only these columns */
+run;
+
+proc means data=SASHELP.IRIS chartype mean std median n nmiss vardef=df clm 
+		alpha=0.05 qmethod=os;
+	var PetalLength PetalWidth;
+run;
+
+proc univariate data=SASHELP.IRIS vardef=df noprint;
+	var PetalLength PetalWidth;
+	histogram PetalLength;
+run;
