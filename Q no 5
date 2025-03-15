@@ -1,0 +1,19 @@
+data NameTime_table;
+    length Name $50 Current_Time $20;
+    Name = "Milan Paudel";  /* Replace with your actual name */
+    Current_Time = put(time(), timeampm11.);  /* Gets current time in hh:mm:ss.ss with AM or PM format */
+    output;
+run;
+
+proc print data=NameTime_table noobs label;
+    var Name Current_Time; /* Display only these columns */
+run;
+proc sort data=SASHELP.HEART out=HeartSorted;
+    by Sex;
+run;
+
+proc univariate data=HeartSorted normal;
+    var Weight;
+    by Sex;
+    ods select TestsForNormality;
+run;
